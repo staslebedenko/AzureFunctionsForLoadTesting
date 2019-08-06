@@ -14,6 +14,7 @@ The level endpoint parameter can is set in the range from 0 to 100.
 You can run this solution locally or deploy it to your Azure function.
 
 Http Functions:
+        
         Load: [GET] http://localhost:7071/api/load/{level}
         LoadCpu: [GET] http://localhost:7071/api/cpu/{level}
         LoadMemory: [GET] http://localhost:7071/api/memory/{level}
