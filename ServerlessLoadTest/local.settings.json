@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "APPINSIGHTS_INSTRUMENTATIONKEY": "38c4851a-ac2a-4c49-8af9-0acc9ee42b33",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "MSDEPLOY_RENAME_LOCKED_FILES": 1
+  }
+}
