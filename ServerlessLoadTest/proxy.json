@@ -4,7 +4,11 @@
     "proxy1": {
       "matchCondition": {
         "methods": [ "GET" ],
-        "route": "/api/{name}"
+        "route": "/loaderio-42f11f82029998946343cdeee0686dab"
+      },
+      "responseOverrides": {
+        "response.body": "loaderio-42f11f82029998946343cdeee0686dab",
+        "response.headers.Content-Type": "text/plain"
       }
     }
   }
