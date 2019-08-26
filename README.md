@@ -25,7 +25,7 @@ Azure CLI for function app below.
 
         az storage account create --name $functionsStorAccName --location $location \
         --resource-group $functionsGroupName --sku $storageAccountSku
-
+        
         location=northeurope
         insightsGroupName=atom-serverless-demo-2019
         insightsName=atom-telemetry
@@ -45,8 +45,35 @@ Azure CLI for function app below.
         az functionapp create --resource-group $functionsGroupName \
         --name $functionAppName --storage-account $functionsStorAccName --runtime $runtime \
         --app-insights-key $insightsKey --consumption-plan-location $location
+        
+        az functionapp deployment slot create --resource-group $functionsGroupName \
+        --name $functionAppName --slot staging
 
-Http Functions:
+In case you want to use Premium plan, here are Azure cli scripts.
+        
+        functionsGroupName=atom-serverless-demo-2019
+        premiunFuncAppName=PremiumDemo2019
+        functionsStorAccName=atomservdemo2019
+        planName=PremiumAtom
+        runtime=dotnet
+        insightsGroupName=atom-serverless-demo-2019
+        insightsName=atom-telemetry
+        
+         az resource create --resource-group $insightsGroupName --name $insightsName --resource-type "Microsoft.Insights/components" --location $location --properties '{"Application_Type":"web"}'
+        
+        insightsKey=$(az resource show -g $insightsGroupName -n $insightsName --resource-type "Microsoft.Insights/components" --query properties.InstrumentationKey)
+
+        az functionapp plan create --resource-group $functionsGroupName --name $planName \
+        --min-instances 1 --max-burst 5 --sku EP1
+
+        az functionapp create --resource-group $functionsGroupName \
+        --name $premiunFuncAppName --storage-account $functionsStorAccName --runtime $runtime \
+        --app-insights-key $insightsKey --plan $planName
+
+        az functionapp deployment slot create --resource-group $functionsGroupName \
+        --name $premiunFuncAppName --slot staging
+
+Http Functions endpoints for local execution:
         
         Load: [GET] http://localhost:7071/api/load/{level}
         LoadCpu: [GET] http://localhost:7071/api/cpu/{level}
